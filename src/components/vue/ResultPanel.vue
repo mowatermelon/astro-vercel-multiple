@@ -89,8 +89,7 @@ const emit = defineEmits(['new-battle']);
 </script>
 
 <template>
-  <div v-if="showResult" class="result-panel bg-white p-6 rounded-xl shadow-lg animate-fade-in-up mb-8 relative">
-    <div class="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded text-sm font-medium">Vue</div>
+  <div v-if="showResult" class="result-panel bg-white p-6 rounded-xl shadow-lg animate-fade-in-up mb-8">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-2xl font-bold text-gray-800">对战结果</h2>
       <button 

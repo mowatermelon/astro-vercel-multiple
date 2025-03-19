@@ -1,0 +1,36 @@
+---
+/**
+ * 框架包装器组件
+ * 为各框架组件添加统一的边框和框架标识
+ */
+export interface Props {
+  framework: string; // 框架名称
+  showBorder?: boolean; // 是否显示边框
+  customClass?: string; // 自定义CSS类
+}
+
+const { framework, showBorder = true, customClass = '' } = Astro.props;
+---
+
+{showBorder ? (
+  <div class={`framework-block relative border border-gray-200 rounded-lg p-1 ${customClass}`}>
+    <div class="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded text-sm font-medium z-10">
+      {framework}
+    </div>
+    <slot />
+  </div>
+) : (
+  <div class={customClass}>
+    <slot />
+  </div>
+)}
+
+<style>
+  .framework-block {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .framework-block:hover {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  }
+</style>

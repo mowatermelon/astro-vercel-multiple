@@ -83,8 +83,7 @@ export function AttractionList() {
   };
 
   return (
-    <div className="react-container mb-8 relative">
-      <div className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded text-sm font-medium">React</div>
+    <div className="react-container mb-8">
       {filteredAttractions.length > 0 ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">

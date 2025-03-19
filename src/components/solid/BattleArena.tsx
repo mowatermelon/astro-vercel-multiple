@@ -176,8 +176,7 @@ export const BattleArena = () => {
   };
 
   return (
-    <div class="solid-container bg-white p-6 rounded-lg shadow-md mb-8 relative">
-      <div class="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded text-sm font-medium">Solid</div>
+    <div class="solid-container">
       <Show when={battleActive()}>
         <div class="battle-container bg-white rounded-xl shadow-lg p-6 mb-8">
           <div class="flex justify-between items-center mb-6">

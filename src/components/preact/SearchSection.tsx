@@ -60,8 +60,7 @@ export function SearchSection() {
   };
 
   return (
-    <div className="preact-container bg-white p-6 rounded-lg shadow-md mb-8 relative">
-      <div className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded text-sm font-medium">Preact</div>
+    <div className="preact-container bg-white p-6 rounded-lg shadow-md mb-8">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">选择地区和景点</h2>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
