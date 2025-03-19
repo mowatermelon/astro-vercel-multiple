@@ -254,7 +254,7 @@ export const BattleArena = () => {
                       }`}
                   >
                     {message.text}
-                    {message.typing && <span class="typing-indicator">|</span>}
+                    {/* {message.typing && <span class="typing-indicator">|</span>} */}
                   </div>
                 </div>
               )}
