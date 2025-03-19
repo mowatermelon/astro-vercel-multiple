@@ -3,46 +3,47 @@
 import '../styles/global.css';
 
 // Component Imports
-// For JSX components, all the common ways of exporting (under a namespace, specific export, default export etc) are supported!
-import * as react from '../components/react/ReactCounter';
-import { PreactCounter } from '../components/preact/PreactCounter';
-import SolidCounter from '../components/solid/SolidCounter';
+import { SearchSection } from '../components/preact/SearchSection';
+import { AttractionList } from '../components/react/AttractionList';
+import { BattleArena } from '../components/solid/BattleArena';
+import ResultPanel from '../components/vue/ResultPanel.vue';
+import AnimationWrapper from '../components/svelte/AnimationWrapper.svelte';
 
-import VueCounter from '../components/vue/VueCounter.vue';
-import SvelteCounter from '../components/svelte/SvelteCounter.svelte';
+// 创建共享状态
+import { createSharedState } from '../utils/state';
+const sharedState = createSharedState();
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>文旅竞技场 - 景点拟人化对战</title>
 	</head>
-	<body>
-		<main>
-			<react.Counter client:visible>
-				<h1>Hello from React!</h1>
-			</react.Counter>
-
-			<PreactCounter client:visible>
-				<h1>Hello from Preact!</h1>
-			</PreactCounter>
-
-			<SolidCounter client:visible>
-				<h1>Hello from Solid!</h1>
-			</SolidCounter>
-
-			<VueCounter client:visible>
-				<h1>Hello from Vue!</h1>
-			</VueCounter>
-
-			<SvelteCounter client:visible>
-				<h1>Hello from Svelte!</h1>
-			</SvelteCounter>
+	<body class="bg-gray-100 min-h-screen">
+		<header class="bg-blue-800 text-white py-6">
+			<div class="container mx-auto px-4">
+				<h1 class="text-3xl font-bold text-center">文旅竞技场</h1>
+				<p class="text-center mt-2">景点拟人化对战，体验不一样的旅游推荐</p>
+			</div>
+		</header>
+		
+		<main class="container mx-auto px-4 py-8">
+			<SearchSection client:only="preact" />
+			<AttractionList client:visible />
+			<BattleArena client:visible />
+			<ResultPanel client:idle />
 		</main>
+		
+		<footer class="bg-gray-800 text-white py-4 mt-12">
+			<div class="container mx-auto px-4 text-center">
+				<p>文旅竞技场 © 2023 - 让旅游选择更有趣</p>
+			</div>
+		</footer>
 	</body>
 </html>

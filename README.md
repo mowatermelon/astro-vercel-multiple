@@ -1,13 +1,7 @@
-# Kitchen Sink: Microfrontends with Astro
+# 文旅竞技场
 
-```sh
-pnpm create astro@latest -- --template framework-multiple
-```
+随着国内旅游市场的蓬勃发展，游客在选择旅游目的地和景点时常常面临信息过载和选择困难的问题。传统的旅游推荐方式往往过于枯燥，缺乏互动性和趣味性，难以激发用户的兴趣和参与度。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/framework-multiple)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/framework-multiple)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/framework-multiple/devcontainer.json)
+「文旅竞技场」应运而生，它通过景点拟人化对战的创新方式，将枯燥的景点介绍转化为生动有趣的"对话"，帮助用户在轻松愉悦的氛围中了解不同景点的特色，从而做出更符合个人偏好的旅游选择。
 
-This example showcases Astro's built-in support for multiple frameworks ([React](https://react.dev), [Preact](https://preactjs.com), [Svelte](https://svelte.dev), and [Vue (`v3.x`)](https://v3.vuejs.org/)).
-
-No configuration is needed to enable these frameworks—just start writing components in `src/components`.
+「文旅竞技场」采用Astro多框架集成能力，基于 nanostores 利用不同前端框架的优势实现各个功能模块，形成完整的景点对战体验。
