@@ -64,8 +64,9 @@ export function SearchSection() {
       <h2 className="text-2xl font-bold text-gray-800 mb-4">选择地区和景点</h2>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">地区</label>
+          <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">地区</label>
           <input
+            id="location"
             type="text"
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="输入地区名称..."
@@ -89,8 +90,9 @@ export function SearchSection() {
           )}
         </div>
         <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">关键词</label>
+          <label htmlFor="keyword" className="block text-sm font-medium text-gray-700 mb-1">关键词</label>
           <input
+            id="keyword"
             type="text"
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="搜索景点名称、特色..."
