@@ -22,6 +22,20 @@ import { battleState } from '../utils/state';
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>文旅竞技场 - 景点拟人化对战</title>
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{Astro.url}" />
+		<meta property="og:title" content="文旅竞技场 - 景点拟人化对战" />
+		<meta property="og:description" content="景点拟人化对战，体验不一样的旅游推荐" />
+		<meta property="og:image" content="{new URL('/favicon.svg', Astro.url)}" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="{Astro.url}" />
+		<meta property="twitter:title" content="文旅竞技场 - 景点拟人化对战" />
+		<meta property="twitter:description" content="景点拟人化对战，体验不一样的旅游推荐" />
+		<meta property="twitter:image" content="{new URL('/favicon.svg', Astro.url)}" />
 	</head>
 	<body class="bg-gray-100 min-h-screen">
 		<header class="bg-blue-800 text-white py-6">
