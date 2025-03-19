@@ -38,6 +38,13 @@ export const BattleArena = () => {
     setShowVoteButtons(false);
     setWinner(null);
     
+    // 重置全局对话状态
+    globalBattleState.setKey('messages', []);
+    globalBattleState.setKey('winner', null);
+    globalBattleState.setKey('loser', null);
+    globalBattleState.setKey('winnerFeature', '');
+    globalBattleState.setKey('loserFeature', '');
+    
     if (selected.length === 2) {
       // 设置对战景点
       setLeftAttraction(selected[0]);
@@ -65,11 +72,15 @@ export const BattleArena = () => {
 
   // 开始对战
   const startBattle = (left: Attraction, right: Attraction) => {
+    // 完全重置所有状态
     setMessages([]);
     setIsTyping(true);
     setShowVoteButtons(false);
     setWinner(null);
-
+    
+    // 重置全局对话状态
+    globalBattleState.setKey('messages', []);
+    
     // 生成对话内容
     const dialogue = generateDialogue(left, right);
 
