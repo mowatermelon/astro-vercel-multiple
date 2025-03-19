@@ -3,7 +3,7 @@ import { signal, effect } from "@preact/signals";
 import { searchTerm, searchLocation, recentLocations } from "../../utils/state";
 
 export function SearchSection() {
-  const localSearchTerm = signal('');
+  const localSearchTerm = signal<string | null>(null);
   const localSearchLocation = signal('');
   const showRecentLocations = signal(false);
   const recentLocationsList = signal<string[]>([]);
@@ -11,7 +11,7 @@ export function SearchSection() {
   // 初始化本地状态从全局状态
   effect(() => {
     // 只在组件初始化时从全局状态同步一次
-    if (localSearchTerm.value === '') {
+    if (localSearchTerm.value === null) {
       localSearchTerm.value = searchTerm.get();
     }
   });
@@ -22,10 +22,10 @@ export function SearchSection() {
       localSearchLocation.value = searchLocation.get();
     }
   });
-  
+
   // 单向数据流：本地状态变化时更新全局状态
   const updateGlobalState = () => {
-    searchTerm.set(localSearchTerm.value);
+    searchTerm.set(localSearchTerm.value as string);
     searchLocation.set(localSearchLocation.value);
   };
 
@@ -60,11 +60,11 @@ export function SearchSection() {
   };
 
   return (
-    <div className="preact-container bg-white p-6 rounded-lg shadow-md mb-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">选择地区和景点</h2>
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">地区</label>
+    <div className="preact-container bg-white responsive-p rounded-lg shadow-md mb-8">
+      <h2 className="responsive-text-2xl font-bold text-gray-800 mb-4">选择地区和景点</h2>
+      <div className="flex flex-col md:flex-row gap-4 mobile-stack responsive-gap">
+        <div className="relative flex-1 mobile-full-width">
+          <label htmlFor="location" className="block responsive-text-sm font-medium text-gray-700 mb-1">地区</label>
           <input
             id="location"
             type="text"
@@ -78,7 +78,7 @@ export function SearchSection() {
           {showRecentLocations.value && recentLocationsList.value.length > 0 && (
             <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
               {recentLocationsList.value.map((location) => (
-                <div 
+                <div
                   key={location}
                   className="p-2 hover:bg-blue-50 cursor-pointer"
                   onClick={() => selectLocation(location)}
@@ -89,25 +89,25 @@ export function SearchSection() {
             </div>
           )}
         </div>
-        <div className="flex-1">
-          <label htmlFor="keyword" className="block text-sm font-medium text-gray-700 mb-1">关键词</label>
+        <div className="flex-1 mobile-full-width">
+          <label htmlFor="keyword" className="block responsive-text-sm font-medium text-gray-700 mb-1">关键词</label>
           <input
             id="keyword"
             type="text"
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="搜索景点名称、特色..."
-            value={localSearchTerm.value}
+            value={localSearchTerm.value || ''}
             onInput={handleTermInput}
           />
         </div>
       </div>
       <div className="mt-4">
-        <div className="text-sm text-gray-600">热门地区：</div>
-        <div className="flex flex-wrap gap-2 mt-1">
+        <div className="responsive-text-sm text-gray-600">热门地区：</div>
+        <div className="flex flex-wrap gap-2 mt-1 responsive-gap">
           {recentLocationsList.value.map((location) => (
             <button
               key={location}
-              className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-full"
+              className="px-3 py-1 responsive-text-sm bg-gray-100 hover:bg-gray-200 rounded-full"
               onClick={() => selectLocation(location)}
             >
               {location}
