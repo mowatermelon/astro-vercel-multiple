@@ -18,7 +18,7 @@ import { battleState } from '../utils/state';
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>文旅竞技场 - 景点拟人化对战</title>
@@ -38,6 +38,12 @@ import { battleState } from '../utils/state';
 		<meta property="twitter:image" content="{new URL('/favicon.svg', Astro.url)}" />
 	</head>
 	<body class="bg-gray-100 min-h-screen">
+		<script>
+			// 初始化响应式字体大小计算
+			import { calculateResponsiveFontSize } from '../utils/responsive';
+			const responsiveFontSize = calculateResponsiveFontSize();
+			responsiveFontSize.initialize();
+		</script>
 		<header class="bg-blue-800 text-white py-6">
 			<div class="container mx-auto px-4">
 				<h1 class="text-3xl font-bold text-center">文旅竞技场</h1>

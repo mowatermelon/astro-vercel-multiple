@@ -1,5 +1,64 @@
 @import 'tailwindcss';
 
+:root {
+  --base-font-size: 14px;
+  --space-unit: 4px;
+  --responsive-scale: 1;
+  
+  /* 颜色变量 */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-secondary: #6b7280;
+  --color-background: #f3f4f6;
+  --color-text: #1f2937;
+  --color-text-light: #6b7280;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* 响应式间距类 */
+.responsive-p {
+  padding: calc(var(--space-unit) * 4);
+}
+
+.responsive-m {
+  margin: calc(var(--space-unit) * 4);
+}
+
+.responsive-gap {
+  gap: calc(var(--space-unit) * 4);
+}
+
+/* 响应式文本类 */
+.responsive-text-sm {
+  font-size: calc(0.875rem * var(--responsive-scale));
+}
+
+.responsive-text-base {
+  font-size: calc(1rem * var(--responsive-scale));
+}
+
+.responsive-text-lg {
+  font-size: calc(1.125rem * var(--responsive-scale));
+}
+
+.responsive-text-xl {
+  font-size: calc(1.25rem * var(--responsive-scale));
+}
+
+.responsive-text-2xl {
+  font-size: calc(1.5rem * var(--responsive-scale));
+}
+
+/* 动画 */
 @keyframes fade-in-up {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -7,4 +66,28 @@
 
 .animate-fade-in-up {
   animation: fade-in-up 0.5s ease-out;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .container {
+    padding-left: calc(var(--space-unit) * 3);
+    padding-right: calc(var(--space-unit) * 3);
+  }
+  
+  h1 {
+    font-size: calc(1.75rem * var(--responsive-scale));
+  }
+  
+  h2 {
+    font-size: calc(1.5rem * var(--responsive-scale));
+  }
+  
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  .mobile-full-width {
+    width: 100% !important;
+  }
 }
