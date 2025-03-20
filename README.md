@@ -1,7 +1,85 @@
-# 文旅竞技场
+# Cultural Tourism Arena
 
-随着国内旅游市场的蓬勃发展，游客在选择旅游目的地和景点时常常面临信息过载和选择困难的问题。传统的旅游推荐方式往往过于枯燥，缺乏互动性和趣味性，难以激发用户的兴趣和参与度。
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-「文旅竞技场」应运而生，它通过景点拟人化对战的创新方式，将枯燥的景点介绍转化为生动有趣的"对话"，帮助用户在轻松愉悦的氛围中了解不同景点的特色，从而做出更符合个人偏好的旅游选择。
+As the tourism market continues to flourish, travelers often face information overload and decision paralysis when choosing destinations and attractions. Traditional tourism recommendations tend to be monotonous, lacking interactivity and engagement, making it difficult to spark user interest and participation.
 
-「文旅竞技场」采用Astro多框架集成能力，基于 nanostores 利用不同前端框架的优势实现各个功能模块，形成完整的景点对战体验。
+The "Cultural Tourism Arena" was born to address this challenge. Through an innovative approach of personifying attractions in battle-style interactions, it transforms mundane attraction descriptions into lively "dialogues," helping users understand the unique features of different attractions in a relaxed and enjoyable atmosphere, enabling them to make travel choices that better align with their preferences.
+
+## ✨ Features
+
+- 🎮 **Attraction Battle System** - Innovative personification of attractions for more engaging introductions
+- 🎯 **Multi-Framework Integration** - Leveraging Astro's multi-framework capabilities
+- 📦 **State Management** - Efficient cross-framework state management with nanostores
+- 🎨 **Responsive Design** - Perfect adaptation to various device screens
+- 🚀 **High Performance** - Built with Astro for optimal loading and rendering efficiency
+
+## 🚀 Quick Start
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/mowatermelon/astro-vercel-multiple.git
+cd astro-vercel-multiple
+```
+
+2. Install dependencies
+
+```bash
+pnpm install
+```
+
+3. Start the development server
+
+```bash
+pnpm run dev
+```
+
+4. Open [http://localhost:4321](http://localhost:4321) in your browser
+
+## 🚀 Deployment
+
+Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=astro-vercel-multiple) by clicking the button below:
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/mowatermelon/astro-vercel-multiple)
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Modern static site generator
+- [React](https://reactjs.org) - UI interaction components
+- [Vue](https://vuejs.org) - Attraction display components
+- [Svelte](https://svelte.dev) - Animation effect components
+- [nanostores](https://github.com/nanostores/nanostores) - Cross-framework state management
+
+## 📦 Project Structure
+
+```
+├── src/
+│   ├── components/     # Framework components
+│   ├── data/          # Attraction data
+│   ├── pages/         # Page routes
+│   ├── styles/        # Global styles
+│   └── utils/         # Utility functions
+├── public/            # Static assets
+└── docs/             # Project documentation
+```
+
+## 🤝 Contributing
+
+Contributions are always welcome! To contribute, please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## 🌐 Other Languages
+
+- [中文](README.zh.md)
+- [日本語](README.ja.md)
+- [한국어](README.ko.md)
