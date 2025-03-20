@@ -3,7 +3,10 @@
 import '../styles/global.css';
 
 // Component Imports
+import '../styles/global.css';
+
 import { SearchSection } from '../components/preact/SearchSection';
+import { AttractionSwiper } from '../components/react/AttractionSwiper';
 import { AttractionList } from '../components/react/AttractionList';
 import { BattleArena } from '../components/solid/BattleArena';
 import ResultPanel from '../components/vue/ResultPanel.vue';
@@ -11,8 +14,6 @@ import ResultPanel from '../components/vue/ResultPanel.vue';
 import FrameworkWrapper from '../components/FrameworkWrapper.astro';
 import { battleState } from '../utils/state';
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <html lang="zh-CN">
@@ -56,9 +57,17 @@ import { battleState } from '../utils/state';
 				<SearchSection client:visible />
 			</FrameworkWrapper>
 			
-			<FrameworkWrapper framework="React" showBorder={true}>
-				<AttractionList client:visible />
-			</FrameworkWrapper>
+			<div class="md:hidden">
+				<FrameworkWrapper framework="React" showBorder={true}>
+					<AttractionSwiper client:only="react" />
+				</FrameworkWrapper>
+			</div>
+			
+			<div class="hidden md:block">
+				<FrameworkWrapper framework="React" showBorder={true}>
+					<AttractionList client:only="react" />
+				</FrameworkWrapper>
+			</div>
 			
 			<FrameworkWrapper framework="Solid" showBorder={!!battleState.get().leftAttraction}>
 				<BattleArena client:visible />

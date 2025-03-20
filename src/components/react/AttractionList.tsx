@@ -6,7 +6,12 @@ import { searchTerm, searchLocation, selectedAttractions as storeSelectedAttract
 
 const ThemeContext = createContext('light');
 
-export function AttractionList() {
+interface AttractionListProps {
+  className?: string;
+  'client:only'?: string;
+}
+
+export function AttractionList(props: AttractionListProps) {
   const [theme] = useState(useContext(ThemeContext));
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [filteredAttractions, setFilteredAttractions] = useState<Attraction[]>(allAttractions);
