@@ -318,21 +318,6 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                     </svg>
                   </div>
                 </div>
-
-                {/* 开始对战按钮 - 放在网格布局外部 */}
-                {showStartButton && (
-                  <div className="flex justify-center my-4">
-                    <button
-                      onClick={startBattle}
-                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-                    >
-                      {getCurrentLang() === 'zh' ? '开始对战' : 
-                       getCurrentLang() === 'en' ? 'Start Battle' : 
-                       getCurrentLang() === 'ja' ? 'バトル開始' : 
-                       getCurrentLang() === 'ko' ? '대결 시작' : '开始对战'}
-                    </button>
-                  </div>
-                )}
                 
                 {/* 网格布局显示多个景点 - 优化移动端布局 */}
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2">
@@ -401,6 +386,20 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                   ))}
                 </div>
               </div>)}
+              {/* 开始对战按钮 - 放在网格布局外部 */}
+              {showStartButton && (
+                  <div className="flex justify-center my-4">
+                    <button
+                      onClick={startBattle}
+                      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                    >
+                      {getCurrentLang() === 'zh' ? '开始对战' : 
+                       getCurrentLang() === 'en' ? 'Start Battle' : 
+                       getCurrentLang() === 'ja' ? 'バトル開始' : 
+                       getCurrentLang() === 'ko' ? '대결 시작' : '开始对战'}
+                    </button>
+                  </div>
+                )}
 
           </div>
 
