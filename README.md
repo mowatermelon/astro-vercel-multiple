@@ -12,6 +12,8 @@ The "Cultural Tourism Arena" was born to address this challenge. Through an inno
 ## ✨ Features
 
 - 🎮 **Attraction Battle System** - Innovative personification of attractions for more engaging introductions
+- 🌐 **i18n Support** - Complete internationalization support for interface, attraction descriptions and battle content
+- 📱 **Mobile Optimization** - Enhanced battle experience for mobile devices with touch controls and animation effects
 - 🎯 **Multi-Framework Integration** - Leveraging Astro's multi-framework capabilities
 - 📦 **State Management** - Efficient cross-framework state management with nanostores
 - 🎨 **Responsive Design** - Perfect adaptation to various device screens
