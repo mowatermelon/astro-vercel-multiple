@@ -1,5 +1,8 @@
 # 文旅竞技场
 
+[![build status](https://img.shields.io/badge/部署-Vercel-blue)](https://https://astro-battle-plum.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-仓库-green)](https://github.com/mowatermelon/astro-vercel-multiple)
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 随着国内旅游市场的蓬勃发展，游客在选择旅游目的地和景点时常常面临信息过载和选择困难的问题。传统的旅游推荐方式往往过于枯燥，缺乏互动性和趣味性，难以激发用户的兴趣和参与度。

@@ -1,5 +1,8 @@
 # Cultural Tourism Arena
 
+[![build status](https://img.shields.io/badge/部署-Vercel-blue)](https://https://astro-battle-plum.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-仓库-green)](https://github.com/mowatermelon/astro-vercel-multiple)
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 As the tourism market continues to flourish, travelers often face information overload and decision paralysis when choosing destinations and attractions. Traditional tourism recommendations tend to be monotonous, lacking interactivity and engagement, making it difficult to spark user interest and participation.

@@ -1,5 +1,8 @@
 # カルチャーツーリズムアリーナ
 
+[![build status](https://img.shields.io/badge/部署-Vercel-blue)](https://https://astro-battle-plum.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-仓库-green)](https://github.com/mowatermelon/astro-vercel-multiple)
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 観光市場が発展を続ける中、旅行者は目的地や観光スポットを選ぶ際に情報過多と選択の困難さに直面しています。従来の観光案内は単調で、インタラクティブ性や魅力に欠け、ユーザーの興味や参加意欲を引き出すことが難しい状況でした。

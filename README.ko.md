@@ -1,5 +1,8 @@
 # 문화관광 아레나
 
+[![build status](https://img.shields.io/badge/部署-Vercel-blue)](https://https://astro-battle-plum.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-仓库-green)](https://github.com/mowatermelon/astro-vercel-multiple)
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 관광 시장이 지속적으로 발전함에 따라, 여행자들은 목적지와 관광지를 선택할 때 정보 과잉과 선택의 어려움에 직면하고 있습니다. 전통적인 관광 추천 방식은 단조롭고 상호작용성과 흥미가 부족하여 사용자의 관심과 참여를 이끌어내기 어려운 상황이었습니다.
