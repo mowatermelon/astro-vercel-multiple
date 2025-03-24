@@ -1,6 +1,4 @@
 // 景点数据
-import { supportedLanguages } from '../i18n/config';
-
 export type LocalizedText = Record<string, string>;
 export type LocalizedArray = Record<string, string[]>;
 
