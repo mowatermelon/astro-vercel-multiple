@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { attractions as allAttractions } from '../../data/attractions';
 import type { Attraction } from '../../data/attractions';
 import { searchTerm, searchLocation, selectedAttractions as storeSelectedAttractions } from '../../utils/state';
+import { getCurrentLang } from '../../i18n/utils';
 
 interface AttractionSwiperProps {
   className?: string;
@@ -14,11 +15,20 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
   const [currentSearchTerm, setCurrentSearchTerm] = useState('');
   const [currentLocation, setCurrentLocation] = useState('');
   const [showStartButton, setShowStartButton] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string>('全部');
-  const [categories, setCategories] = useState<string[]>(['全部']);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+
+  // 获取"全部"分类的文本
+  const getAllCategoryText = (): string => {
+    const currentLang = getCurrentLang();
+    return currentLang === 'zh' ? '全部' :
+           currentLang === 'en' ? 'All' :
+           currentLang === 'ja' ? 'すべて' :
+           currentLang === 'ko' ? '전체' : '全部';
+  };
 
   // 监听搜索状态变化
   useEffect(() => {
@@ -38,13 +48,64 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
     };
   }, [currentSearchTerm, currentLocation, activeCategory]);
 
+  // 监听语言变化事件
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // 重新获取当前语言并更新分类
+      const currentLang = getCurrentLang();
+      const uniqueFeatures = new Set<string>();
+      uniqueFeatures.add(getAllCategoryText());
+      
+      allAttractions.forEach(attraction => {
+        const features = attraction.features[currentLang] || 
+                        (Array.isArray(attraction.features) ? attraction.features : []);
+        
+        features.forEach(feature => {
+          uniqueFeatures.add(feature);
+        });
+      });
+      
+      setCategories(Array.from(uniqueFeatures));
+      // 使用当前的搜索条件重新过滤景点
+      filterAttractions(currentSearchTerm, currentLocation, activeCategory);
+    };
+
+    window.addEventListener('languageChanged', handleLanguageChange);
+    
+    // 初始化分类
+    const currentLang = getCurrentLang();
+    const uniqueFeatures = new Set<string>();
+    uniqueFeatures.add(getAllCategoryText());
+
+    allAttractions.forEach(attraction => {
+      const features = attraction.features[currentLang] || 
+                      (Array.isArray(attraction.features) ? attraction.features : []);
+      
+      features.forEach(feature => {
+        uniqueFeatures.add(feature);
+      });
+    });
+
+    setCategories(Array.from(uniqueFeatures));
+
+    // 清理函数
+    return () => {
+      window.removeEventListener('languageChanged', handleLanguageChange);
+    };
+  }, [currentSearchTerm, currentLocation, activeCategory]); // 依赖项包含会在语言切换时需要重新计算的状态
+
   // 提取所有可用的分类
   useEffect(() => {
     const uniqueFeatures = new Set<string>();
-    uniqueFeatures.add('全部');
+    uniqueFeatures.add(getAllCategoryText());
+    const currentLang = getCurrentLang();
 
     allAttractions.forEach(attraction => {
-      attraction.features.forEach(feature => {
+      // 处理多语言特性数组
+      const features = attraction.features[currentLang] || 
+                      (Array.isArray(attraction.features) ? attraction.features : []);
+      
+      features.forEach(feature => {
         uniqueFeatures.add(feature);
       });
     });
@@ -55,27 +116,30 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
   // 过滤景点
   const filterAttractions = (term: string, location: string, category: string) => {
     let filtered = [...allAttractions];
+    const currentLang = getCurrentLang();
 
     // 如果有location筛选条件，则进行过滤
     if (location) {
       filtered = filtered.filter(a =>
-        a.location.toLowerCase() === location.toLowerCase()
+        a.location[currentLang]?.toLowerCase() === location.toLowerCase()
       );
     }
 
     if (term) {
       filtered = filtered.filter(a =>
-        a.name.toLowerCase().includes(term.toLowerCase()) ||
-        a.description.toLowerCase().includes(term.toLowerCase()) ||
-        a.features.some(f => f.toLowerCase().includes(term.toLowerCase()))
+        a.name[currentLang]?.toLowerCase().includes(term.toLowerCase()) ||
+        a.description[currentLang]?.toLowerCase().includes(term.toLowerCase()) ||
+        a.features[currentLang]?.some(f => f.toLowerCase().includes(term.toLowerCase()))
       );
     }
 
     // 按分类筛选
-    if (category && category !== '全部') {
-      filtered = filtered.filter(a =>
-        a.features.some(f => f === category)
-      );
+    if (category && category !== getAllCategoryText()) {
+      filtered = filtered.filter(a => {
+        const features = a.features[currentLang] || 
+                        (Array.isArray(a.features) ? a.features : []);
+        return features.some(f => f === category);
+      });
     }
     
     // 确保没有重复的景点（通过id去重）
@@ -262,7 +326,10 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                       onClick={startBattle}
                       className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                     >
-                      开始对战
+                      {getCurrentLang() === 'zh' ? '开始对战' : 
+                       getCurrentLang() === 'en' ? 'Start Battle' : 
+                       getCurrentLang() === 'ja' ? 'バトル開始' : 
+                       getCurrentLang() === 'ko' ? '대결 시작' : '开始对战'}
                     </button>
                   </div>
                 )}
@@ -274,24 +341,38 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                       <div className="mb-0.5 h-16 sm:h-20 overflow-hidden rounded-md relative">
                         <img
                           src={attraction.image}
-                          alt={attraction.name}
+                          alt={attraction.name[getCurrentLang()] || attraction.name.toString()}
                           className="w-full h-full object-cover transition-transform duration-500"
                         />
                         <div className="absolute bottom-0 right-0 bg-blue-500 text-white px-1 py-0.5 rounded-tl-md text-xs font-medium">
-                          {attraction.location}
+                          {attraction.location[getCurrentLang()] || (typeof attraction.location === 'string' ? attraction.location : '')}
                         </div>
                       </div>
-                      <h3 className="text-sm font-semibold mb-0.5 text-gray-800 line-clamp-1">{attraction.name}</h3>
-                      <p className="text-xs text-gray-600 mb-0.5 line-clamp-1 sm:line-clamp-2">{attraction.description}</p>
+                      <h3 className="text-sm font-semibold mb-0.5 text-gray-800 line-clamp-1">
+                        {attraction.name[getCurrentLang()] || (typeof attraction.name === 'string' ? attraction.name : '')}
+                      </h3>
+                      <p className="text-xs text-gray-600 mb-0.5 line-clamp-1 sm:line-clamp-2">
+                        {attraction.description[getCurrentLang()] || (typeof attraction.description === 'string' ? attraction.description : '')}
+                      </p>
                       <div className="flex flex-wrap gap-0.5 mb-0.5">
-                        {attraction.features.slice(0, 2).map(feature => (
-                          <span key={feature} className="text-xs bg-blue-100 text-blue-800 px-1 py-0.5 rounded-full truncate max-w-[80px]">
-                            {feature}
-                          </span>
-                        ))}
-                        {attraction.features.length > 2 && (
-                          <span className="text-xs bg-gray-100 text-gray-800 px-1 py-0.5 rounded-full">+{attraction.features.length - 2}</span>
-                        )}
+                        {(() => {
+                          const currentLang = getCurrentLang();
+                          const features = attraction.features[currentLang] || 
+                                          (Array.isArray(attraction.features) ? attraction.features : []);
+                          
+                          return (
+                            <>
+                              {features.slice(0, 2).map((feature: string) => (
+                                <span key={feature} className="text-xs bg-blue-100 text-blue-800 px-1 py-0.5 rounded-full truncate max-w-[80px]">
+                                  {feature}
+                                </span>
+                              ))}
+                              {features.length > 2 && (
+                                <span className="text-xs bg-gray-100 text-gray-800 px-1 py-0.5 rounded-full">+{features.length - 2}</span>
+                              )}
+                            </>
+                          );
+                        })()} 
                       </div>
                       <div className="flex items-center justify-between text-blue-600">
                         <span className="flex items-center bg-yellow-50 px-1 py-0.5 rounded-md">
@@ -305,7 +386,15 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                           className={`px-2 py-0.5 text-xs rounded-md transition-all duration-300 transform hover:scale-105 ${selectedIds.includes(attraction.id) ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-blue-100 hover:bg-blue-200'} ${selectedIds.length >= 2 && !selectedIds.includes(attraction.id) ? 'opacity-50 cursor-not-allowed' : ''}`}
                           disabled={selectedIds.length >= 2 && !selectedIds.includes(attraction.id)}
                         >
-                          {selectedIds.includes(attraction.id) ? '取消' : '选择'}
+                          {selectedIds.includes(attraction.id) ? 
+                            (getCurrentLang() === 'zh' ? '取消' : 
+                             getCurrentLang() === 'en' ? 'Cancel' : 
+                             getCurrentLang() === 'ja' ? 'キャンセル' : 
+                             getCurrentLang() === 'ko' ? '취소' : '取消') : 
+                            (getCurrentLang() === 'zh' ? '选择' : 
+                             getCurrentLang() === 'en' ? 'Select' : 
+                             getCurrentLang() === 'ja' ? '選択' : 
+                             getCurrentLang() === 'ko' ? '선택' : '选择')}
                         </button>
                       </div>
                     </div>
@@ -323,14 +412,19 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  已选景点（{selectedIds.length}/2）
+                  {getCurrentLang() === 'zh' ? '已选景点' : 
+                   getCurrentLang() === 'en' ? 'Selected Attractions' : 
+                   getCurrentLang() === 'ja' ? '選択したスポット' : 
+                   getCurrentLang() === 'ko' ? '선택한 명소' : '已选景点'}（{selectedIds.length}/2）
                 </h4>
                 <div className="flex flex-wrap gap-1">
                   {selectedIds.map(id => {
                     const attraction = allAttractions.find(a => a.id === id);
                     return attraction ? (
                       <div key={id} className="flex items-center bg-white rounded-full pl-2 pr-1 py-0.5 shadow-sm border border-blue-200 transition-all duration-200 hover:shadow-md">
-                        <span className="text-xs text-blue-800 mr-1 font-medium">{attraction.name}</span>
+                        <span className="text-xs text-blue-800 mr-1 font-medium">
+                          {attraction.name[getCurrentLang()] || (typeof attraction.name === 'string' ? attraction.name : '')}
+                        </span>
                         <button
                           onClick={() => handleSelect(attraction)}
                           className="w-4 h-4 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-200 transition-colors"
@@ -348,7 +442,10 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 110 20 10 10 0 010-20z" />
                       </svg>
-                      请选择另一个景点
+                      {getCurrentLang() === 'zh' ? '请选择另一个景点' : 
+                       getCurrentLang() === 'en' ? 'Please select another attraction' : 
+                       getCurrentLang() === 'ja' ? '別のスポットを選択してください' : 
+                       getCurrentLang() === 'ko' ? '다른 명소를 선택해주세요' : '请选择另一个景点'}
                     </div>
                   )}
                 </div>
@@ -358,7 +455,13 @@ export function AttractionSwiper({ className = '' }: AttractionSwiperProps) {
         </>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-600">未找到符合条件的景点，请尝试其他搜索条件。</p>
+          <p className="text-gray-600">
+            {getCurrentLang() === 'zh' ? '未找到符合条件的景点，请尝试其他搜索条件。' : 
+             getCurrentLang() === 'en' ? 'No attractions found matching your criteria. Please try different search terms.' : 
+             getCurrentLang() === 'ja' ? '条件に一致する観光スポットが見つかりません。他の検索条件をお試しください。' : 
+             getCurrentLang() === 'ko' ? '조건에 맞는 명소를 찾을 수 없습니다. 다른 검색 조건을 시도해보세요.' : 
+             '未找到符合条件的景点，请尝试其他搜索条件。'}
+          </p>
         </div>
       )}
     </div>

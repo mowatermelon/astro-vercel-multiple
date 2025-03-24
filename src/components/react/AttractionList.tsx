@@ -3,6 +3,7 @@ import { useContext, useState, createContext, useEffect } from 'react';
 import { attractions as allAttractions } from '../../data/attractions';
 import type { Attraction } from '../../data/attractions';
 import { searchTerm, searchLocation, selectedAttractions as storeSelectedAttractions } from '../../utils/state';
+import { getCurrentLang } from '../../i18n/utils';
 
 const ThemeContext = createContext('light');
 
@@ -18,6 +19,22 @@ export function AttractionList(props: AttractionListProps) {
   const [currentSearchTerm, setCurrentSearchTerm] = useState('');
   const [currentLocation, setCurrentLocation] = useState('');
   const [showStartButton, setShowStartButton] = useState(false);
+  const currentLang = getCurrentLang();
+
+  // 监听语言变化事件
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // 重新获取当前语言并使用当前的搜索条件重新过滤景点
+      filterAttractions(currentSearchTerm, currentLocation);
+    };
+
+    window.addEventListener('languageChanged', handleLanguageChange);
+
+    // 清理函数
+    return () => {
+      window.removeEventListener('languageChanged', handleLanguageChange);
+    };
+  }, [currentSearchTerm, currentLocation]); // 依赖项包含会在语言切换时需要重新计算的状态
 
   // 监听搜索状态变化
   useEffect(() => {
@@ -40,19 +57,20 @@ export function AttractionList(props: AttractionListProps) {
   // 过滤景点
   const filterAttractions = (term: string, location: string) => {
     let filtered = [...allAttractions];
+    const currentLang = getCurrentLang();
 
     // 如果有location筛选条件，则进行过滤
     if (location) {
       filtered = filtered.filter(a =>
-        a.location.toLowerCase() === location.toLowerCase()
+        a.location[currentLang]?.toLowerCase() === location.toLowerCase()
       );
     }
 
     if (term) {
       filtered = filtered.filter(a =>
-        a.name.toLowerCase().includes(term.toLowerCase()) ||
-        a.description.toLowerCase().includes(term.toLowerCase()) ||
-        a.features.some(f => f.toLowerCase().includes(term.toLowerCase()))
+        a.name[currentLang]?.toLowerCase().includes(term.toLowerCase()) ||
+        a.description[currentLang]?.toLowerCase().includes(term.toLowerCase()) ||
+        a.features[currentLang]?.some(f => f.toLowerCase().includes(term.toLowerCase()))
       );
     }
 
@@ -100,14 +118,14 @@ export function AttractionList(props: AttractionListProps) {
                 <div className="mb-3 h-40 overflow-hidden rounded-lg">
                   <img
                     src={attraction.image}
-                    alt={attraction.name}
+                    alt={attraction.name[currentLang] || attraction.name.toString()}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">{attraction.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{attraction.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">{attraction.name[currentLang] || attraction.name.toString()}</h3>
+                <p className="text-gray-600 text-sm mb-3">{attraction.description[currentLang] || attraction.description.toString()}</p>
                 <div className="flex flex-wrap gap-1 mb-3">
-                  {attraction.features.map(feature => (
+                  {(attraction.features[currentLang] || (Array.isArray(attraction.features) ? attraction.features : [])).map(feature => (
                     <span key={feature} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
                       {feature}
                     </span>
@@ -125,7 +143,15 @@ export function AttractionList(props: AttractionListProps) {
                     className={`px-4 py-2 rounded-md transition-colors ${selectedIds.includes(attraction.id) ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-blue-100 hover:bg-blue-200'} ${selectedIds.length >= 2 && !selectedIds.includes(attraction.id) ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={selectedIds.length >= 2 && !selectedIds.includes(attraction.id)}
                   >
-                    {selectedIds.includes(attraction.id) ? '取消选择' : '选择对战'}
+                    {selectedIds.includes(attraction.id) ? 
+                      (getCurrentLang() === 'zh' ? '取消选择' : 
+                       getCurrentLang() === 'en' ? 'Cancel Selection' : 
+                       getCurrentLang() === 'ja' ? '選択を解除' : 
+                       getCurrentLang() === 'ko' ? '선택 취소' : '取消选择') : 
+                      (getCurrentLang() === 'zh' ? '选择对战' : 
+                       getCurrentLang() === 'en' ? 'Select for Battle' : 
+                       getCurrentLang() === 'ja' ? 'バトル用に選択' : 
+                       getCurrentLang() === 'ko' ? '대결용 선택' : '选择对战')}
                   </button>
                 </div>
               </div>
@@ -138,14 +164,23 @@ export function AttractionList(props: AttractionListProps) {
                 onClick={startBattle}
                 className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               >
-                开始对战
+                {getCurrentLang() === 'zh' ? '开始对战' : 
+                 getCurrentLang() === 'en' ? 'Start Battle' : 
+                 getCurrentLang() === 'ja' ? 'バトル開始' : 
+                 getCurrentLang() === 'ko' ? '대결 시작' : '开始对战'}
               </button>
             </div>
           )}
         </>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-600">未找到符合条件的景点，请尝试其他搜索条件。</p>
+          <p className="text-gray-600">
+            {getCurrentLang() === 'zh' ? '未找到符合条件的景点，请尝试其他搜索条件。' : 
+             getCurrentLang() === 'en' ? 'No attractions found matching your criteria. Please try different search terms.' : 
+             getCurrentLang() === 'ja' ? '条件に一致する観光スポットが見つかりません。他の検索条件をお試しください。' : 
+             getCurrentLang() === 'ko' ? '조건에 맞는 명소를 찾을 수 없습니다. 다른 검색 조건을 시도해보세요.' : 
+             '未找到符合条件的景点，请尝试其他搜索条件。'}
+          </p>
         </div>
       )}
     </div>

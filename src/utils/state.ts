@@ -5,7 +5,32 @@ import type { Attraction } from '../data/attractions';
 // 搜索相关状态
 export const searchTerm = atom<string>('');
 export const searchLocation = atom<string>('');
-export const recentLocations = atom<string[]>(['杭州', '北京', '上海', '武汉']);
+export const recentLocations = atom<{ [key: string]: string }[]>([
+  {
+    zh: '杭州',
+    en: 'Hangzhou',
+    ja: '杭州',
+    ko: '항저우'
+  },
+  {
+    zh: '北京',
+    en: 'Beijing',
+    ja: '北京',
+    ko: '베이징'
+  },
+  {
+    zh: '上海',
+    en: 'Shanghai',
+    ja: '上海',
+    ko: '상하이'
+  },
+  {
+    zh: '武汉',
+    en: 'Wuhan',
+    ja: '武漢',
+    ko: '우한'
+  }
+]);
 
 // 景点选择状态
 export const selectedAttractions = atom<Attraction[]>([]);

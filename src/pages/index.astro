@@ -1,87 +1,112 @@
 ---
 // Style Imports
-import '../styles/global.css';
+import "../styles/global.css";
 
 // Component Imports
-import '../styles/global.css';
+import "../styles/global.css";
 
-import { SearchSection } from '../components/preact/SearchSection';
-import { AttractionSwiper } from '../components/react/AttractionSwiper';
-import { AttractionList } from '../components/react/AttractionList';
-import { BattleArena } from '../components/solid/BattleArena';
-import ResultPanel from '../components/vue/ResultPanel.vue';
+import { SearchSection } from "../components/preact/SearchSection";
+import { AttractionSwiper } from "../components/react/AttractionSwiper";
+import { AttractionList } from "../components/react/AttractionList";
+import { BattleArena } from "../components/solid/BattleArena";
+import ResultPanel from "../components/vue/ResultPanel.vue";
+import SvelteHeader from "../components/svelte/Header.svelte";
 
-import FrameworkWrapper from '../components/FrameworkWrapper.astro';
-import { battleState } from '../utils/state';
-
+import FrameworkWrapper from "../components/FrameworkWrapper.astro";
+import LanguageSwitcher from "../components/svelte/LanguageSwitcher.svelte";
+import { battleState } from "../utils/state";
+import { t } from "../i18n/utils";
 ---
 
 <html lang="zh-CN">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>文旅竞技场 - 景点拟人化对战</title>
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="{Astro.url}" />
-		<meta property="og:title" content="文旅竞技场 - 景点拟人化对战" />
-		<meta property="og:description" content="景点拟人化对战，体验不一样的旅游推荐" />
-		<meta property="og:image" content="{new URL('/favicon.svg', Astro.url)}" />
-		
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="{Astro.url}" />
-		<meta property="twitter:title" content="文旅竞技场 - 景点拟人化对战" />
-		<meta property="twitter:description" content="景点拟人化对战，体验不一样的旅游推荐" />
-		<meta property="twitter:image" content="{new URL('/favicon.svg', Astro.url)}" />
-	</head>
-	<body class="bg-gray-100 min-h-screen">
-		<script>
-			// 初始化响应式字体大小计算
-			import { calculateResponsiveFontSize } from '../utils/responsive';
-			const responsiveFontSize = calculateResponsiveFontSize();
-			responsiveFontSize.initialize();
-		</script>
-		<header class="bg-blue-800 text-white py-6">
-			<div class="container mx-auto px-4">
-				<h1 class="text-3xl font-bold text-center">文旅竞技场</h1>
-				<p class="text-center mt-2">景点拟人化对战，体验不一样的旅游推荐</p>
-			</div>
-		</header>
-		
-		<main class="container mx-auto px-4 py-8">
-			<FrameworkWrapper framework="Preact" showBorder={true}>
-				<SearchSection client:visible />
-			</FrameworkWrapper>
-			
-			<div class="md:hidden">
-				<FrameworkWrapper framework="React" showBorder={true}>
-					<AttractionSwiper client:only="react" />
-				</FrameworkWrapper>
-			</div>
-			
-			<div class="hidden md:block">
-				<FrameworkWrapper framework="React" showBorder={true}>
-					<AttractionList client:only="react" />
-				</FrameworkWrapper>
-			</div>
-			
-			<FrameworkWrapper framework="Solid" showBorder={!!battleState.get().leftAttraction}>
-				<BattleArena client:visible />
-			</FrameworkWrapper>
-			
-			<FrameworkWrapper framework="Vue" showBorder={!!battleState.get().winner}>
-				<ResultPanel client:idle />
-			</FrameworkWrapper>
-		</main>
-		
-		<footer class="bg-gray-800 text-white py-4 mt-12">
-			<div class="container mx-auto px-4 text-center">
-				<p>文旅竞技场 © 2025 - 让旅游选择更有趣</p>
-			</div>
-		</footer>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{t("site.title")} - {t("site.subtitle")}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{Astro.url}" />
+    <meta property="og:title" content={t("site.title")} />
+    <meta property="og:description" content={t("meta.description")} />
+    <meta property="og:image" content="{new URL('/favicon.svg', Astro.url)}" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{Astro.url}" />
+    <meta property="twitter:title" content={t("site.title")} />
+    <meta property="twitter:description" content={t("meta.description")} />
+    <meta
+      property="twitter:image"
+      content="{new URL('/favicon.svg', Astro.url)}"
+    />
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <script>
+      // 初始化响应式字体大小计算
+      import { calculateResponsiveFontSize } from "../utils/responsive";
+      const responsiveFontSize = calculateResponsiveFontSize();
+      responsiveFontSize.initialize();
+
+      // 监听语言变化事件，刷新页面以确保所有内容都能正确更新
+      if (typeof window !== "undefined") {
+        window.addEventListener("languageChanged", (e) => {
+          // 获取当前URL
+          const url = new URL(window.location.href);
+          // 设置语言参数
+          url.searchParams.set("lang", e.detail.lang);
+          // 刷新页面以应用新语言
+          window.location.href = url.toString();
+        });
+      }
+    </script>
+    <header class="bg-blue-800 text-white py-6">
+      <FrameworkWrapper framework="svelte" showBorder={true}>
+        <SvelteHeader />
+      </FrameworkWrapper>
+      <FrameworkWrapper framework="svelte" showBorder={true}>
+        <LanguageSwitcher client:load />
+      </FrameworkWrapper>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <FrameworkWrapper framework="Preact" showBorder={true}>
+        <SearchSection client:visible />
+      </FrameworkWrapper>
+
+      <div class="md:hidden">
+        <FrameworkWrapper framework="React" showBorder={true}>
+          <AttractionSwiper client:only="react" />
+        </FrameworkWrapper>
+      </div>
+
+      <div class="hidden md:block">
+        <FrameworkWrapper framework={t("framework.react")} showBorder={true}>
+          <AttractionList client:only="react" />
+        </FrameworkWrapper>
+      </div>
+
+      <FrameworkWrapper
+        framework="Solid"
+        showBorder={!!battleState.get().leftAttraction}
+      >
+        <BattleArena client:visible />
+      </FrameworkWrapper>
+
+      <FrameworkWrapper framework="Vue" showBorder={!!battleState.get().winner}>
+        <ResultPanel client:idle />
+      </FrameworkWrapper>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4 mt-12">
+      <div class="container mx-auto px-4 text-center">
+        <p>{t("site.footer")}</p>
+      </div>
+    </footer>
+  </body>
 </html>

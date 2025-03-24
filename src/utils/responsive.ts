@@ -27,8 +27,6 @@ export function calculateResponsiveFontSize(baseFontSize: number = 14) {
     // 设置其他响应式变量
     document.documentElement.style.setProperty('--space-unit', `${scale * 4}px`);
     document.documentElement.style.setProperty('--responsive-scale', `${scale}`);
-
-    console.log('calculateResponsiveFontSize', fontSize)
   };
 
   // 初始化并添加窗口大小变化监听
