@@ -65,42 +65,25 @@ import { t } from "../i18n/utils";
         });
       }
     </script>
-    <header class="bg-blue-800 text-white py-6">
-      <FrameworkWrapper framework="svelte" showBorder={true}>
-        <SvelteHeader />
-      </FrameworkWrapper>
-      <FrameworkWrapper framework="svelte" showBorder={true}>
-        <LanguageSwitcher client:load />
-      </FrameworkWrapper>
+    <header class="bg-white text-white pb-6">
+      <SvelteHeader />
+      <LanguageSwitcher client:load />
     </header>
 
     <main class="container mx-auto px-4 py-8">
-      <FrameworkWrapper framework="Preact" showBorder={true}>
-        <SearchSection client:visible />
-      </FrameworkWrapper>
+      <SearchSection client:visible />
 
       <div class="md:hidden">
-        <FrameworkWrapper framework="React" showBorder={true}>
-          <AttractionSwiper client:only="react" />
-        </FrameworkWrapper>
+        <AttractionSwiper client:only="react" />
       </div>
 
       <div class="hidden md:block">
-        <FrameworkWrapper framework={t("framework.react")} showBorder={true}>
-          <AttractionList client:only="react" />
-        </FrameworkWrapper>
+        <AttractionList client:only="react" />
       </div>
 
-      <FrameworkWrapper
-        framework="Solid"
-        showBorder={!!battleState.get().leftAttraction}
-      >
-        <BattleArena client:visible />
-      </FrameworkWrapper>
+      <BattleArena client:visible />
 
-      <FrameworkWrapper framework="Vue" showBorder={!!battleState.get().winner}>
-        <ResultPanel client:idle />
-      </FrameworkWrapper>
+      <ResultPanel client:idle />
     </main>
 
     <footer class="bg-gray-800 text-white py-4 mt-12">
