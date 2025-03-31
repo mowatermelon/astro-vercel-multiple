@@ -39,7 +39,7 @@ export const selectedAttractions = atom<Attraction[]>([]);
 export interface DialogueMessage {
   text: string;
   typing: boolean;
-  side: 'left' | 'right';
+  side: 'left' | 'right' | 'system';
 }
 
 export const battleState = map({

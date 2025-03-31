@@ -8,7 +8,11 @@ export interface Attraction {
   description: LocalizedText;
   image: string;
   rating: number;
-  features: LocalizedArray;
+  features: LocalizedArray; // 特色篇
+  cuisine?: LocalizedArray; // 美食篇
+  medicalFacilities?: LocalizedArray; // 医疗篇
+  culture?: LocalizedArray; // 文化篇
+  intangibleHeritage?: LocalizedArray; // 非遗篇
   location: LocalizedText;
 }
 
@@ -879,7 +883,31 @@ export const attractions: Attraction[] = [
       ['歴史的遺跡', '文化的ランドマーク', '詩歌文化'],
       ['역사 유적', '문화 랜드마크', '시가 문화']
     ),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    cuisine: createLocalizedArray(
+      ['楼外楼酒家', '黄鹤楼茶点', '江湖菜系'],
+      ['Louwaifou Restaurant', 'Yellow Crane Tower Dim Sum', 'Jianghu Cuisine'],
+      ['楼外楼酒家', '黄鶴楼点心', '江湖料理'],
+      ['루와이루 레스토랑', '황학루 딤섬', '강호 요리']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉市第一医院', '黄鹤楼社区医院', '急救站点'],
+      ['Wuhan First Hospital', 'Yellow Crane Tower Community Hospital', 'First Aid Station'],
+      ['武漢市第一病院', '黄鶴楼コミュニティ病院', '救急ステーション'],
+      ['우한시 제1병원', '황학루 커뮤니티 병원', '응급 스테이션']
+    ),
+    culture: createLocalizedArray(
+      ['崔颢题诗', '李白诗作', '古代文人雅集'],
+      ['Cui Hao Poetry', 'Li Bai Works', 'Ancient Literary Gatherings'],
+      ['崔顥の詩', '李白の作品', '古代文人の集まり'],
+      ['최호 시', '이백 작품', '고대 문인 모임']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['黄鹤楼诗词文化', '楚剧表演', '汉绣工艺'],
+      ['Yellow Crane Tower Poetry Culture', 'Chu Opera Performance', 'Han Embroidery'],
+      ['黄鶴楼詩歌文化', '楚劇パフォーマンス', '漢刺繍工芸'],
+      ['황학루 시가 문화', '초극 공연', '한수 공예']
+    ),
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
   },
   {
     id: '42',
@@ -903,7 +931,31 @@ export const attractions: Attraction[] = [
       ['自然風景', '生態公園', 'レジャー'],
       ['자연 경관', '생태 공원', '레저 엔터테인먼트']
     ),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '43',
@@ -927,7 +979,31 @@ export const attractions: Attraction[] = [
       ['グルメ街', '伝統的な軽食', '地方文化'],
       ['미식 거리', '전통 간식', '지방 문화']
     ),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '44',
@@ -951,7 +1027,31 @@ export const attractions: Attraction[] = [
       ['川辺の風景', 'レジャーパーク', '都市景観'],
       ['강변 풍경', '레저 공원', '도시 경관']
     ),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '45',
@@ -975,7 +1075,31 @@ export const attractions: Attraction[] = [
       ['キャンパスの風景', '桜の名所', '人文景観'],
       ['캠퍼스 풍경', '벚꽃 명소', '인문 경관']
     ),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '46',
@@ -984,7 +1108,31 @@ export const attractions: Attraction[] = [
     image: 'https://picsum.photos/id/1061/300/200.jpg',
     rating: 4.5,
     features: createLocalizedArray(['历史建筑', '文化遗产', '都市风情'], ['Historical Buildings', 'Cultural Heritage', 'Urban Style'], ['歴史的建物', '文化遺産', '都市の風情'], ['역사 건물', '문화 유산', '도시 풍정']),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '47',
@@ -993,7 +1141,31 @@ export const attractions: Attraction[] = [
     image: 'https://picsum.photos/id/1062/300/200.jpg',
     rating: 4.4,
     features: createLocalizedArray(['佛教文化', '古建筑', '宗教圣地'], ['Buddhist Culture', 'Ancient Architecture', 'Religious Sacred Site'], ['仏教文化', '古代建築', '宗教聖地'], ['불교 문화', '고대 건축', '종교 성지']),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '48',
@@ -1002,7 +1174,31 @@ export const attractions: Attraction[] = [
     image: 'https://picsum.photos/id/1063/300/200.jpg',
     rating: 4.6,
     features: createLocalizedArray(['桥梁建筑', '历史地标', '工业遗产'], ['Bridge Architecture', 'Historical Landmark', 'Industrial Heritage'], ['橋梁建築', '歴史的ランドマーク', '産業遺産'], ['교량 건축', '역사적 랜드마크', '산업 유산']),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '49',
@@ -1011,7 +1207,31 @@ export const attractions: Attraction[] = [
     image: 'https://picsum.photos/id/1064/300/200.jpg',
     rating: 4.5,
     features: createLocalizedArray(['历史街区', '文创艺术', '休闲文化'], ['Historical District', 'Cultural and Creative Arts', 'Leisure Culture'], ['歴史的な地区', '文化創造芸術', 'レジャー文化'], ['역사 지구', '문화 창의 예술', '레저 문화']),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   {
     id: '50',
@@ -1020,7 +1240,31 @@ export const attractions: Attraction[] = [
     image: 'https://picsum.photos/id/1065/300/200.jpg',
     rating: 4.4,
     features: createLocalizedArray(['自然风光', '登山健行', '生态旅游'], ['Natural Scenery', 'Hiking', 'Eco Tourism'], ['自然の風景', 'ハイキング', 'エコツーリズム'], ['자연 경관', '등산 하이킹', '생태 관광']),
-    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한')
+    location: createLocalizedText('武汉', 'Wuhan', '武漢', '우한'),
+    cuisine: createLocalizedArray(
+      ['东湖醉蟹', '藕带糕点', '湖鲜小炒'],
+      ['East Lake Drunken Crab', 'Lotus Root Pastries', 'Lake Fresh Stir-fry'],
+      ['東湖酔蟹', '蓮根菓子', '湖鮮炒め物'],
+      ['동호 취게', '연근 과자', '호수 해산물 볶음']
+    ),
+    medicalFacilities: createLocalizedArray(
+      ['武汉大学中南医院', '东湖医院', '景区医疗服务点'],
+      ['Zhongnan Hospital of Wuhan University', 'East Lake Hospital', 'Scenic Area Medical Service Point'],
+      ['武漢大学中南病院', '東湖病院', '景区医療サービスポイント'],
+      ['우한대학교 중난병원', '동호병원', '경구 의료 서비스 포인트']
+    ),
+    culture: createLocalizedArray(
+      ['东湖画派', '楚文化展示', '湖畔音乐会'],
+      ['East Lake Painting School', 'Chu Culture Exhibition', 'Lakeside Concert'],
+      ['東湖画派', '楚文化展示', '湖畔コンサート'],
+      ['동호 화파', '초 문화 전시', '호반 콘서트']
+    ),
+    intangibleHeritage: createLocalizedArray(
+      ['东湖渔歌', '楚式龙舟', '湖区采莲'],
+      ['East Lake Fishing Songs', 'Chu-style Dragon Boat', 'Lake Lotus Picking'],
+      ['東湖漁歌', '楚式龍船', '湖区蓮摘み'],
+      ['동호 어가', '초식 용선', '호구 연꽃 채집']
+    )
   },
   // 东北景点
   {
